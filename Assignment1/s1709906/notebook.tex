@@ -1,0 +1,1018 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Part1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}this is to plot inside the notebook}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{c+c1}{\PYZsh{} Libraries you will be using in this assignment}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{sklearn}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{c+c1}{\PYZsh{} Makes our plots look nicer}
+        \PY{n}{matplotlib}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{seaborn\PYZhy{}notebook}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Let\PYZsq{}s also hide unnecessary warnings}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} A seed for the random number generator so all results are reproducible}
+        \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{Assignment 1 Part 1}\label{assignment-1-part-1}
+
+This part of the first assignment is meant to familiarize ourselves with
+the basics of data inspection and manipulation and the visualization of
+data. We will also implement a simple error function to compare how well
+different models fit the data.
+
+\subsection{Data Inspection}\label{data-inspection}
+
+Let's first generate some data to have something to work with. Our data
+will consist of \(x,y\) values. We will generate two datasets,
+
+\begin{itemize}
+\tightlist
+\item
+  one is generated by a linear function.
+\item
+  one generated by an exponential function.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{)}
+        \PY{n}{Y\PYZus{}linear} \PY{o}{=} \PY{l+m+mf}{0.2} \PY{o}{+} \PY{n}{X} \PY{o}{*} \PY{l+m+mf}{0.3}
+        \PY{n}{Y\PYZus{}exponential} \PY{o}{=} \PY{l+m+mf}{0.2} \PY{o}{+} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{X}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+    A first important question when handling data is the \emph{shape} of the
+dataset. Use the numpy function \texttt{shape} to determine the shape of
+our \texttt{X} array. Numpy is already imported (in the first cell) and
+for convenience named \texttt{np}, so you can use numpy functions with
+\texttt{np.} instead of \texttt{numpy.}.
+
+Store the shape of \texttt{X} into the variable \texttt{X\_shape}. Make
+sure that your code passes the tests! (1 Point)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}252}]:} \PY{n}{X\PYZus{}shape} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}
+          \PY{n}{X\PYZus{}shape}
+          \PY{c+c1}{\PYZsh{} raise NotImplementedError()}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}252}]:} (25,)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Check that X\PYZus{}shape is the  correct shape\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{k}{assert}\PY{p}{(}\PY{n}{X\PYZus{}shape} \PY{o}{==} \PY{p}{(}\PY{l+m+mi}{25}\PY{p}{,}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    What is the size of \texttt{X}? Use the numpy \texttt{size} function and
+store the result in the variable \texttt{X\_size}. (1 Point)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}253}]:} \PY{n}{X\PYZus{}size} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{size}
+          \PY{n}{X}\PY{o}{.}\PY{n}{size}
+          \PY{c+c1}{\PYZsh{}raise NotImplementedError()}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}253}]:} 25
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Check that X\PYZus{}size is the  correct size\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{k}{assert}\PY{p}{(}\PY{n}{X\PYZus{}size} \PY{o}{==} \PY{l+m+mi}{25}\PY{p}{)}
+\end{Verbatim}
+
+
+    \texttt{np.shape} and \texttt{np.size} returned two different types. Use
+\texttt{type()} to determine the types of \texttt{X\_size} and
+\texttt{X\_shape}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}254}]:} \PY{n}{type\PYZus{}X\PYZus{}size} \PY{o}{=} \PY{n+nb}{type}\PY{p}{(}\PY{n}{X\PYZus{}size}\PY{p}{)}
+          \PY{n}{type\PYZus{}X\PYZus{}shape} \PY{o}{=} \PY{n+nb}{type}\PY{p}{(}\PY{n}{X\PYZus{}shape}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} raise NotImplementedError()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}255}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Check that type\PYZus{}X\PYZus{}size and type\PYZus{}X\PYZus{}shape are correct\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{k}{assert}\PY{p}{(}\PY{n}{type\PYZus{}X\PYZus{}size} \PY{o+ow}{is} \PY{n+nb}{int}\PY{p}{)}
+          \PY{k}{assert}\PY{p}{(}\PY{n}{type\PYZus{}X\PYZus{}shape} \PY{o+ow}{is} \PY{n+nb}{tuple}\PY{p}{)}
+\end{Verbatim}
+
+
+    In nearly all cases, the data we measure or collect is noisy. To
+simulate noisy data we will add some random noise to our data.
+
+Generate an array \texttt{noise} of the appropriate size. The noise
+should be
+\href{https://en.wikipedia.org/wiki/Normal_distribution}{random normal},
+i.e. generated from a normal distribution (\(N(\mu, \sigma^2)\)) with a
+\emph{variance} (\(\sigma^2\)) of \(0.025\) and a \emph{mean} (\(\mu\))
+of \(0\).
+
+First store the noise variance in a variable \texttt{noise\_variance}.
+Then use numpy's \texttt{np.random.randn} to generate the noise values
+and store them in a variable \texttt{noise}.
+
+Finally, add \texttt{noise} to \texttt{Y\_linear} and
+\texttt{Y\_exponential} and create two new variables
+\texttt{Y\_linear\_noisy} and \texttt{Y\_exponential\_noisy}.
+
+Remember that: - \texttt{noise} has to have the \emph{same} size as our
+\texttt{X} and \texttt{Y} data. - \texttt{np.random.randn} generates
+random points from \(N(\mu = 0, \sigma^2 = 1)\). We want a variance
+different from \(\sigma^2 = 1\)! Check the documentation of
+\texttt{np.random.randn} on how to generate points with a different
+variance.
+
+(2 Points)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}260}]:} \PY{c+c1}{\PYZsh{}noise\PYZus{}variance = ...       Set the variance to 0.025}
+          \PY{c+c1}{\PYZsh{}noise = ...                Sample the correct number of random normal values with the appropriate variance}
+          \PY{c+c1}{\PYZsh{}Y\PYZus{}linear\PYZus{}noisy = ...       Save the noisy version of the linear function (additive noise)}
+          \PY{c+c1}{\PYZsh{}Y\PYZus{}exponential\PYZus{}noisy = ...  Save the noisy version of the exponential function (additive noise)}
+          
+          \PY{n}{noise\PYZus{}variance} \PY{o}{=} \PY{l+m+mf}{0.025}
+          \PY{n}{noise} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mf}{0.025}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{25}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{0}
+          \PY{n}{Y\PYZus{}linear\PYZus{}noisy} \PY{o}{=} \PY{n}{noise} \PY{o}{+} \PY{n}{Y\PYZus{}linear}
+          \PY{n}{Y\PYZus{}exponential\PYZus{}noisy} \PY{o}{=} \PY{n}{noise} \PY{o}{+} \PY{n}{Y\PYZus{}exponential}
+          
+          \PY{c+c1}{\PYZsh{} raise NotImplementedError()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}261}]:} \PY{k}{assert}\PY{p}{(}\PY{n}{noise\PYZus{}variance} \PY{o}{==} \PY{l+m+mf}{0.025}\PY{p}{)}
+          \PY{k}{assert}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{n}{noise}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{25}\PY{p}{)}
+          \PY{k}{assert}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{noise}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.75}\PY{p}{)}
+          \PY{k}{assert}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{noise}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.025}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{Visualizing our Functions}\label{visualizing-our-functions}
+
+An important part of data analysis is visualizing data and results.
+
+Plot \texttt{Y\_linear\_noisy} and \texttt{Y\_exponential\_noisy}
+against their respective \texttt{X} values. Use the \texttt{plt} alias
+for \texttt{Matplotlib.pyplot} that we imported in the first cell of the
+notebook.
+
+\begin{itemize}
+\tightlist
+\item
+  Plot both the exponential and the linear function as scatter plots in
+  respective subplots (i.e. in \textbf{one} figure)!
+\item
+  Set labels for both \(x\) and \(y\) axes.
+\item
+  Set a title for the figure (pick a large font size).
+\item
+  Set titles for the subplots, indicating the generating function
+  (linear/exponential).
+\item
+  Set the figure size to 12 x 6.
+\item
+  Set all subplot axes to span \((0,1)\) for both the \(x\) and \(y\)
+  axis.
+\item
+  Make the subplots share the y-axis.
+\item
+  Plot the noise-free function for each function in the respective
+  subplot as a line plot. Pick a different color for true function and
+  scatter points.
+\item
+  Set a legend for the subplots indicating noise-free and noisy data.
+\end{itemize}
+
+You can get extra points (up to 2) for any other improvements on the
+presentation. Some ideas: - Have one shared legend for the two subplots.
+- Remove the unnecessary box-lines for the top- and right-side of the
+subplots. - Improve the size of scatter-points and the noise-free line
+to make the plot more visible.
+
+(5 Points)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}262}]:} \PY{c+c1}{\PYZsh{} plot both the exponential and the linear function as scatter plots in respective subplots (in one figure)}
+          \PY{n}{f}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y\PYZus{}linear\PYZus{}noisy}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{noisy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y\PYZus{}exponential\PYZus{}noisy}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{noisy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}set labels for both x and y axes}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x axis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y axis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x axis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}set a title for the figure (large font size)}
+          \PY{n}{f}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+          \PY{n}{f}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{top}\PY{o}{=}\PY{l+m+mf}{0.8}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data Inspection}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{40}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}set titles for the subplots, indicating the generating function (linear/exponential)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Exponential}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}set the figure size to 12 x 6}
+          \PY{c+c1}{\PYZsh{}f, (ax1, ax2) = plt.subplots(1, 2, sharey=True, figsize=(12,6))}
+          
+          \PY{c+c1}{\PYZsh{}set all subplots axes to span (0,1) for the both the x and y axis}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}make the subplots share the y\PYZhy{}axis}
+          \PY{c+c1}{\PYZsh{}f, (ax1, ax2) = plt.subplots(1, 2, sharey=True, figsize=(12,6))}
+          \PY{c+c1}{\PYZsh{}sharey = True}
+          
+          \PY{c+c1}{\PYZsh{}Plot the noise\PYZhy{}free function for each function in the respective subplot as a line plot. Pick a different color for true function and scatter points.}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{Y\PYZus{}linear}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{noise\PYZhy{}free}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{orange}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{Y\PYZus{}exponential}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{noise\PYZhy{}free}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{orange}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Set a legend for the subplots indicating noise\PYZhy{}free and noisy data.}
+          
+          \PY{c+c1}{\PYZsh{}Have one shared legend for the two subplots.}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{1.05}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{borderaxespad}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Remove the unnecessary box\PYZhy{}lines for the top\PYZhy{} and right\PYZhy{}side of the subplots.}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{spines}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{spines}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{top}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{spines}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{spines}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{top}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}visible}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Improve the size of scatter\PYZhy{}points and the noise\PYZhy{}free line to make the plot more visible.}
+          \PY{c+c1}{\PYZsh{}s = 100}
+          \PY{c+c1}{\PYZsh{}linewidth = 3}
+          
+          \PY{c+c1}{\PYZsh{} raise NotImplementedError()}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Models \& Model Errors}\label{models-model-errors}
+
+We will go into more detail the different models you've encountered in
+the lectures and labs, as well as how to critically evaluate them, in
+part 2 of the assignment. Here we only want to get more familiar with
+the general process of defining, training and evaluating a model.
+
+Our first model is a simple \textbf{Linear Regression} model. The simple
+linear regression model assumes that the target values \(y\) are
+generated by \(y = X \beta +intercept+ \epsilon\).
+
+That means that the target values \(y\) are the result of a
+multiplication of the predictor values \(X\) with the \(\beta\)
+coefficient and the addition of an intercept. Finally, linear regression
+allows for an additive error term \(\epsilon\).
+
+You do not have to worry about the details of linear regression. Here we
+will simply compare this model with a more complex model that you
+encountered in the lecture, a multilayer perceptron (MLP).
+
+Both linear regression and multilayer perceptrons are simple models and
+we could implement them ourselves (and this is a good exercise to test
+your understanding how the algorithms work). For convenience, here we
+won't implement anything ourselves, and we use the implementation
+provided by the \texttt{sklearn} package.
+
+We import the relevant models and specify the default models for each
+dataset with:
+
+\texttt{linear\_regression\_model\ =\ LinearRegression()} and
+\texttt{mlp\_model\ =\ MLPRegressor()}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}161}]:} \PY{c+c1}{\PYZsh{} Import the MLP and linear regression models}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neural\PYZus{}network} \PY{k}{import} \PY{n}{MLPRegressor}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}162}]:} \PY{n}{lin\PYZus{}reg\PYZus{}model\PYZus{}linear} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+          \PY{n}{lin\PYZus{}reg\PYZus{}model\PYZus{}exponential} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Many parameters can be specified for the models, here we pick all the defaults but}
+          \PY{c+c1}{\PYZsh{} select an iterative solver \PYZdq{}lbfgs\PYZdq{} for the MLP models.}
+          \PY{c+c1}{\PYZsh{} One plausible alternative solver to use would be gradient descent, which we introduced in the lecture.}
+          \PY{c+c1}{\PYZsh{} The selection of this particular solver is simply as an example and you do not need to worry about why a }
+          \PY{c+c1}{\PYZsh{} particular solver is/was used.}
+          
+          \PY{n}{mlp\PYZus{}model\PYZus{}linear} \PY{o}{=} \PY{n}{MLPRegressor}\PY{p}{(}\PY{n}{solver}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lbfgs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{mlp\PYZus{}model\PYZus{}exponential} \PY{o}{=} \PY{n}{MLPRegressor}\PY{p}{(}\PY{n}{solver}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lbfgs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    Now we will fit our two models to the linear and exponential data. Since
+sklearn models assumes a particular shape for the feature array we need
+to reshape our data, using \texttt{np.reshape(-1,1)}, transforming our
+\texttt{(250,)} shaped data to be \texttt{(250,1)} shaped.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}163}]:} \PY{n}{mlp\PYZus{}model\PYZus{}linear}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{Y\PYZus{}linear\PYZus{}noisy}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}163}]:} MLPRegressor(activation='relu', alpha=0.0001, batch\_size='auto', beta\_1=0.9,
+                 beta\_2=0.999, early\_stopping=False, epsilon=1e-08,
+                 hidden\_layer\_sizes=(100,), learning\_rate='constant',
+                 learning\_rate\_init=0.001, max\_iter=200, momentum=0.9,
+                 nesterovs\_momentum=True, power\_t=0.5, random\_state=None,
+                 shuffle=True, solver='lbfgs', tol=0.0001, validation\_fraction=0.1,
+                 verbose=False, warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}164}]:} \PY{n}{mlp\PYZus{}model\PYZus{}exponential}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{Y\PYZus{}exponential\PYZus{}noisy}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}164}]:} MLPRegressor(activation='relu', alpha=0.0001, batch\_size='auto', beta\_1=0.9,
+                 beta\_2=0.999, early\_stopping=False, epsilon=1e-08,
+                 hidden\_layer\_sizes=(100,), learning\_rate='constant',
+                 learning\_rate\_init=0.001, max\_iter=200, momentum=0.9,
+                 nesterovs\_momentum=True, power\_t=0.5, random\_state=None,
+                 shuffle=True, solver='lbfgs', tol=0.0001, validation\_fraction=0.1,
+                 verbose=False, warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}165}]:} \PY{n}{lin\PYZus{}reg\PYZus{}model\PYZus{}linear}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{Y\PYZus{}linear\PYZus{}noisy}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}165}]:} LinearRegression(copy\_X=True, fit\_intercept=True, n\_jobs=1, normalize=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}166}]:} \PY{n}{lin\PYZus{}reg\PYZus{}model\PYZus{}exponential}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{Y\PYZus{}exponential\PYZus{}noisy}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}166}]:} LinearRegression(copy\_X=True, fit\_intercept=True, n\_jobs=1, normalize=False)
+\end{Verbatim}
+            
+    Now that we fitted the models we are interested in inspecting how well
+the models fit the data.
+
+Remember how the linear regression model fitted the \(y\) values as a
+result of the multiplication with a coefficient \(\beta\) and an
+intercept? We can inspect these values after fitting the model and
+compare them to the true data.
+
+After training (fitting the model) on the linear data, the coefficient
+for the linear regression model is:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}167}]:} \PY{n}{lin\PYZus{}reg\PYZus{}model\PYZus{}linear}\PY{o}{.}\PY{n}{coef\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}167}]:} array([0.3954786])
+\end{Verbatim}
+            
+    And the intercept is:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}168}]:} \PY{n}{lin\PYZus{}reg\PYZus{}model\PYZus{}linear}\PY{o}{.}\PY{n}{intercept\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}168}]:} 0.14418936886644151
+\end{Verbatim}
+            
+    Which shows that the model learned the relationship of the data, since
+the fitted slope and intercept are close to the real values (\(0.3\) and
+\(0.2\)).
+
+    \subsection{Predictions}\label{predictions}
+
+We can also inspect how our models predict values \(y\) for the learned
+\(x\) values and compare them to the true \(y\) values (much more on
+this in part 2 of the assignment).
+
+We predict the \(y\) values for our two models for the linear data
+simply by calling \texttt{.predict} on our model (and remember we need
+to reshape the data so that sklearn accepts it).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}169}]:} \PY{n}{lin\PYZus{}reg\PYZus{}pred\PYZus{}lin} \PY{o}{=} \PY{n}{lin\PYZus{}reg\PYZus{}model\PYZus{}linear}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+          \PY{n}{mlp\PYZus{}pred\PYZus{}lin} \PY{o}{=} \PY{n}{mlp\PYZus{}model\PYZus{}linear}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    And the same for the exponential data:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}170}]:} \PY{n}{lin\PYZus{}reg\PYZus{}pred\PYZus{}exp} \PY{o}{=} \PY{n}{lin\PYZus{}reg\PYZus{}model\PYZus{}exponential}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+          \PY{n}{mlp\PYZus{}pred\PYZus{}exp} \PY{o}{=} \PY{n}{mlp\PYZus{}model\PYZus{}exponential}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{Visualizing Predictions}\label{visualizing-predictions}
+
+Now it's your go! Plot the predictions that we just calculated for all
+our models. Plot predictions for both MLP and linear regression on both
+functions.
+
+As before, use the \texttt{plt} alias for \texttt{Matplotlib.pyplot}
+that we imported in the first cell of the notebook and plot all results
+in \textbf{one figure}. Create two subplots, one for the predictions for
+the linear data and one for the predictions of the exponential data.
+Then: - Plot the true, noisy data for linear and exponential. - Plot the
+MLP and linear regression predictions on top of the true data as line
+plots (in their respective subplots). Pick clearly distinguishable
+colors if necessary. - Set the \(x\) and \(y\) labels. - Set a title for
+the figure (pick a large font size). - Set titles for the subplots,
+indicating the generating function (linear \& exponential). - Set the
+figure size to 12 x 6. - Set all subplot axes to span \((0,1)\) for both
+the \(x\) and \(y\) axis. - Make the subplots share the y-axis. - Set a
+legend for the subplots indicating the true data, the MLP predicton and
+the linear regression prediction.
+
+(4 Points)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}210}]:} \PY{c+c1}{\PYZsh{} PLOT ALL RESULTS IN ONE FIGURE}
+          \PY{c+c1}{\PYZsh{} CREATE TWO SUBPLOTS \PYZhy{} 1. LINEAR DATA 2. EXPONENTIAL DATA}
+          \PY{n}{f}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y\PYZus{}linear\PYZus{}noisy}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{True Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{mlp\PYZus{}pred\PYZus{}lin}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MLP Prediction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{lin\PYZus{}reg\PYZus{}pred\PYZus{}lin}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{orange}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear Regression Prediction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y\PYZus{}exponential\PYZus{}noisy}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{True Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{mlp\PYZus{}pred\PYZus{}exp}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MLP Prediction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{lin\PYZus{}reg\PYZus{}pred\PYZus{}exp}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{orange}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear Regression Prediction}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Set the x and y labels}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x axis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y axis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{xlabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x axis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Set a title for the figure (large font size)}
+          \PY{n}{f}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Visualizing Predictions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Set titles for the subplots, indicating the generating function (linear \PYZam{} exponential)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Exponential}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Set the figure size to 12 x 6. done}
+          
+          \PY{c+c1}{\PYZsh{}Set all subplot axes to span (0,1) for both the x and y axis. }
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Make all the subplots share the same y axis. done}
+          
+          \PY{c+c1}{\PYZsh{}Set a legend for the subplots indicating the true data, the MLP prediction and the Linear Reg. prediction}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{1.05}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{borderaxespad}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}raise NotImplementedError()}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}210}]:} <matplotlib.legend.Legend at 0x1a2e2b3240>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Calculating Model Errors}\label{calculating-model-errors}
+
+The plots give us a visual indication of how good our model is at
+capturing the data. In addition to this visual description we are
+interested in having a estimate of how good our model is. One simple
+method to determine how good our prediction is to calculate how close
+our predictions are on average to the true data. One way to determine
+this measure is via the mean squared error of our prediction (MSE,
+https://en.wikipedia.org/wiki/Mean\_squared\_error).
+
+Implement the MSE in the function \texttt{calculate\_MSE} below. The
+function should take two numpy arrays and calculate the MSE:
+
+\[
+MSE = \frac{1}{n} \sum_{i=1}^{n}(Y_{predicted} - Y_{true})^2
+\]
+
+Make sure that your implementation operates \textbf{in vectorized form},
+i.e. \textbf{do not} loop through all values (as the formula suggests).
+Instead directly subtract the two arrays and use numpy functions.
+\textbf{Do not} use scikit-learns implementation of MSE or any other
+ready-made implementation, but stick to numpy functions.
+
+(5 Points)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}239}]:} \PY{k}{def} \PY{n+nf}{calculate\PYZus{}MSE}\PY{p}{(}\PY{n}{y\PYZus{}predicted}\PY{p}{,} \PY{n}{y\PYZus{}true}\PY{p}{)}\PY{p}{:}
+              \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{    Calculates the MSE of a model}
+          \PY{l+s+sd}{    }
+          \PY{l+s+sd}{    Parameters:}
+          \PY{l+s+sd}{    y\PYZus{}predicted are the predicted outputs of our model (numpy vector of values)}
+          \PY{l+s+sd}{    y\PYZus{}true are the true values (numpy vector of values)}
+          \PY{l+s+sd}{   }
+          \PY{l+s+sd}{    returns the MSE, which is a scalar value (a number)}
+          \PY{l+s+sd}{    }
+          \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}    
+              
+              \PY{n}{MSE} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{(}\PY{n}{y\PYZus{}predicted} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}true}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} raise NotImplementedError()}
+              
+              \PY{k}{return} \PY{n}{MSE}  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}240}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Check that the MSE function returns the correct output\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{k}{assert}\PY{p}{(}\PY{n}{calculate\PYZus{}MSE}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{==} \PY{l+m+mf}{0.0}\PY{p}{)}\PY{p}{)}
+          \PY{k}{assert}\PY{p}{(}\PY{n}{calculate\PYZus{}MSE}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)} \PY{o}{==} \PY{l+m+mf}{0.0}\PY{p}{)}
+          \PY{k}{assert}\PY{p}{(}\PY{n}{calculate\PYZus{}MSE}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)} \PY{o}{==} \PY{l+m+mf}{1.0}\PY{p}{)}
+          \PY{k}{assert}\PY{p}{(}\PY{n}{calculate\PYZus{}MSE}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{==} \PY{l+m+mf}{1.0}\PY{p}{)}
+          \PY{k}{assert}\PY{p}{(}\PY{n}{calculate\PYZus{}MSE}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{213}\PY{p}{,} \PY{l+m+mi}{5000}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{123}\PY{p}{,}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{5000}\PY{p}{)}\PY{p}{)} \PY{o}{==} \PY{l+m+mf}{26402.52590518103}\PY{p}{)}
+          \PY{k}{assert}\PY{p}{(}\PY{n}{calculate\PYZus{}MSE}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{500}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{l+m+mi}{500}\PY{p}{)} \PY{o}{==} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{l+m+mi}{500}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          
+          \PY{k}{del} \PY{n}{np}
+          \PY{k}{try}\PY{p}{:}
+              \PY{n}{calculate\PYZus{}MSE}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+          
+          \PY{k}{except} \PY{n+ne}{NameError}\PY{p}{:}
+              \PY{k}{pass}
+          
+          \PY{k}{else}\PY{p}{:}
+              \PY{k}{raise} \PY{n+ne}{AssertionError}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{calculate\PYZus{}MSE does not call numpy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} restore the original function}
+          \PY{k}{finally}\PY{p}{:}
+              \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+
+    Let's calculate the errors for our two models for both functions with
+our new MSE function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}208}]:} \PY{n}{mlp\PYZus{}error\PYZus{}exponential} \PY{o}{=} \PY{n}{calculate\PYZus{}MSE}\PY{p}{(}\PY{n}{mlp\PYZus{}pred\PYZus{}exp}\PY{p}{,} \PY{n}{Y\PYZus{}exponential\PYZus{}noisy}\PY{p}{)}
+          \PY{n}{mlp\PYZus{}error\PYZus{}linear} \PY{o}{=} \PY{n}{calculate\PYZus{}MSE}\PY{p}{(}\PY{n}{mlp\PYZus{}pred\PYZus{}lin}\PY{p}{,} \PY{n}{Y\PYZus{}linear\PYZus{}noisy}\PY{p}{)}
+          
+          \PY{n}{lin\PYZus{}reg\PYZus{}error\PYZus{}exponential} \PY{o}{=} \PY{n}{calculate\PYZus{}MSE}\PY{p}{(}\PY{n}{lin\PYZus{}reg\PYZus{}pred\PYZus{}exp}\PY{p}{,} \PY{n}{Y\PYZus{}exponential\PYZus{}noisy}\PY{p}{)}
+          \PY{n}{lin\PYZus{}reg\PYZus{}error\PYZus{}linear} \PY{o}{=} \PY{n}{calculate\PYZus{}MSE}\PY{p}{(}\PY{n}{lin\PYZus{}reg\PYZus{}pred\PYZus{}lin}\PY{p}{,} \PY{n}{Y\PYZus{}linear\PYZus{}noisy}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{Visualizing Model Errors}\label{visualizing-model-errors}
+
+Now plot the MSE errors as a bar plot. As before, use the \texttt{plt}
+alias for \texttt{Matplotlib.pyplot} that we imported in the first cell
+of the notebook and plot all results in \textbf{one figure}. Create two
+subplots, one for the predictions for the linear data and one for the
+predictions of the exponential data.
+
+\begin{itemize}
+\tightlist
+\item
+  Set a title for the figure (pick a large font size).
+\item
+  Set titles for the subplots, indicating the generating data (linear \&
+  exponential).
+\item
+  Set meaningful marks/labels for the \(x\) axis.
+\item
+  Set the figure size to 12 x 6.
+\item
+  Make the subplots share the y-axis.
+\end{itemize}
+
+You might need some help on how to structure the data for plotting, as
+Matplotlib's bar plot takes \(x\) values and corresponding heights. One
+easy way to get our data in the right shape (and solve one of the tasks
+above) is to use the names of the models as the the \(x\) values (for
+example \texttt{{[}"Linear\ Regression",\ "MLP"{]}}) and pack our MSEs
+into a list of heights (for example
+\texttt{{[}error\_linear,\ error\_mlp{]}} if \texttt{error\_linear} is
+where our MSE is stored).
+
+(5 Points)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}263}]:} \PY{c+c1}{\PYZsh{}Plot the MSE Errors as a bar plot}
+          
+          \PY{c+c1}{\PYZsh{}Create two subplots}
+          \PY{n}{f}\PY{p}{,} \PY{p}{(}\PY{n}{ax1}\PY{p}{,} \PY{n}{ax2}\PY{p}{)} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{sharey}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+          \PY{n}{width} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{4}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MLP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{mlp\PYZus{}error\PYZus{}linear}\PY{p}{,} \PY{n}{width}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Linear Regression}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{lin\PYZus{}reg\PYZus{}error\PYZus{}linear}\PY{p}{,} \PY{n}{width}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{orange}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MLP}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{mlp\PYZus{}error\PYZus{}exponential}\PY{p}{,} \PY{n}{width}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Linear Regression}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{lin\PYZus{}reg\PYZus{}error\PYZus{}exponential}\PY{p}{,} \PY{n}{width}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{orange}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Set a title for the figure (pick a large font size)}
+          \PY{n}{f}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Model Errors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Set titles for the subplots, indicating the generating data (linear \PYZam{} exponential)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Exponential}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax1}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{ylabel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Set meaningful marks/labels for the x axis}
+          \PY{c+c1}{\PYZsh{}?}
+          
+          \PY{c+c1}{\PYZsh{}Set the figure size to 12 x 6. done}
+          
+          \PY{c+c1}{\PYZsh{}Make the subplots share the y\PYZhy{}axis. done}
+          
+          \PY{c+c1}{\PYZsh{}raise NotImplementedError()}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}263}]:} [Text(0,0.5,'Error')]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Written Questions:}\label{written-questions}
+
+To finish Problem Set 1, please answer the following questions. For each
+question provide your reply in the cell below the question (indicated by
+\texttt{YOUR\ ANSWER\ HERE}). Answers can be brief, but should be full
+sentences!
+
+    \subsection{Question 1}\label{question-1}
+
+Compare the errors of MLP and linear regression for the exponential data
+and explain in your own words why it makes sense that the MLP error is
+lower than the linear error. Compare the prediction of the MLP and the
+linear regression models or have a look at the definitions of both
+models to make your argument. (2 Points)
+
+    I have observed that the Linear regression yields more errors than the
+Multilayer Perceptron.
+
+Linear Regression is a linear model for predicting classifications on
+datasets while the Multilayer Perceptron (MLP) is exponential
+(non-linear). Since the dataset we were presented with is non-linear, it
+is not surprising that the Linear Regression yielded a higher error
+(Linear Regression works best with linear data). Since the Multilayer
+Perceptron is exponential, it is therefore more flexible and is able to
+manoeuvre towards the outlier data. No amount of training (or how
+well-trained the linear model is) can make the linear model shaped more
+like the exponential (MLP) model, making it less flexible and more prone
+to errors.
+
+    \subsection{Question 2:}\label{question-2}
+
+Have a look at the errors and predictions for both linear and
+exponential data for MLP and linear regression.
+
+Would you expect both models to perform equally well for some data? What
+kind of data should be well modeled by a linear regression and MLP
+alike?
+
+(1 Point)
+
+    The Linear Regression and Multilayer Perceptron could both perform
+equally well on noiseless linear data but not for anything else, because
+Linear Regression works best with linear data (dataset has very few
+outliers and are clustered in a linear form), whilst the Multilayer
+Perceptron is much more flexible can work with of datasets of all shapes
+and sizes.
+
+    \subsection{Question 3:}\label{question-3}
+
+From our error plots and the predictions it seems as if MLP always does
+an equal or better job than linear regression. Does that mean that we
+should always use MLPs?
+
+There are many different forms of MLP or deep neuronal networks and many
+different techniques to train them. For this question only consider the
+MLPs encountered in the lecture or the labs. (3Pts)
+
+    The Multilayer Perceptron is able to learn non-linear models, hence
+making them much more flexible and powerful than the Linear Regression.
+However, if you have a relatively linear dataset, it would be more
+efficient to use Linear Regression because it is faster (MLP has to work
+with more data and try to fit the data into the model), remains
+consistent and takes up less memory.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

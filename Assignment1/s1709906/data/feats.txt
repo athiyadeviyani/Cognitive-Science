@@ -1,0 +1,16 @@
+beh_-_eats
+beh_-_eats_grass
+beh_-_flies
+has_4_legs
+has_a_beak
+has_a_tail
+has_feathers
+has_fur
+has_hooves
+has_horns
+has_legs
+has_wings
+is_brown
+is_fast
+is_large
+is_small

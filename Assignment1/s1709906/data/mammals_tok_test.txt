@@ -1,0 +1,15 @@
+gorilla
+beaver
+chimp
+bear
+fox
+skunk
+raccoon
+whale
+walrus
+seal
+dolphin
+otter
+platypus
+mole
+bat
